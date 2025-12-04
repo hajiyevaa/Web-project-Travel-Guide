@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azerbaijan Travel Guide</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" id="home-logo">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span>Azerbaijan Travel Guide</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="explore">Explore</a></li>
+                        <li><a href="#" class="nav-link" data-page="favorites">Favorites</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-primary" id="login-btn">Login</button>
+                    <button class="btn btn-secondary" id="register-btn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Discover the Beauty of Azerbaijan</h1>
+                <p>Explore ancient cities, stunning landscapes, and rich cultural heritage in the Land of Fire</p>
+                <button class="btn btn-primary" id="explore-cta">Start Exploring</button>
+            </div>
+
+            <div class="featured-places">
+                <h2 class="section-title">Featured Places</h2>
+                <div class="places-grid" id="featured-places">
+                </div>
+            </div>
+        </section>
+
+        <!-- Explore Page -->
+        <section id="explore" class="page">
+            <h2 class="section-title">Explore Azerbaijan</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="historical">Historical</button>
+                <button class="filter-btn" data-category="natural">Natural</button>
+                <button class="filter-btn" data-category="cultural">Cultural</button>
+                <button class="filter-btn" data-category="modern">Modern</button>
+            </div>
+
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+
+            <div class="places-grid" id="explore-places">
+            </div>
+        </section>
+
+        <!-- Place Detail Page -->
+        <section id="place-detail" class="page">
+        </section>
+
+        <!-- Favorites Page -->
+        <section id="favorites" class="page">
+            <h2 class="section-title">Your Favorites</h2>
+            <div class="favorites-container" id="favorites-container">
+            </div>
+        </section>
+
+        <!-- Login Page -->
+        <section id="login" class="page">
+            <div class="auth-container">
+                <h2>Login to Your Account</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Login</button>
+                </form>
+                <div class="auth-link">
+                    <p>Don't have an account? <a href="#" id="register-link">Sign up here</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Register Page -->
+        <section id="register" class="page">
+            <div class="auth-container">
+                <h2>Create Your Account</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="register-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Create Account</button>
+                </form>
+                <div class="auth-link">
+                    <p>Already have an account? <a href="#" id="go-to-login">Login here</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Review Modal -->
+    <div class="modal" id="review-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Your Review</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="modal-place-name">Place Name</h4>
+                <div class="rating-stars" id="rating-stars">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <textarea class="review-text" id="review-text" placeholder="Share your experience..."></textarea>
+                <button class="submit-review" id="submit-review">Submit Review</button>
+                
+                <div class="reviews-section" id="reviews-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>Your ultimate guide to exploring the beauty of Azerbaijan. Discover hidden gems, popular attractions, and local favorites.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" data-page="home">Home</a></li>
+                        <li><a href="#" data-page="explore">Explore</a></li>
+                        <li><a href="#" data-page="favorites">Favorites</a></li>
+                        <li><a href="#" data-page="explore">About Azerbaijan</a></li>
+                        <li><a href="#" data-page="explore">Travel Tips</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Baku, Azerbaijan</li>
+                        <li><i class="fas fa-phone"></i> +994 12 *** ** **</li>
+                        <li><i class="fas fa-envelope"></i> info@***.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Azerbaijan Travel Guide.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/map.js"></script>
+    <script src="scripts/ui.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
